@@ -1,0 +1,763 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cinco Perguntas Decisivas</title>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --blue: #576c7e;
+  --dark: #263847;
+  --muted: #657482;
+  --line: #dce3e8;
+  --light: #f4f7f9;
+  --white: #ffffff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: transparent;
+  color: var(--dark);
+  font-family: "Open Sans", Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.app {
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 22px 18px 35px;
+}
+
+h1 {
+  font-size: 25px;
+  font-weight: 700;
+  margin: 0 0 7px;
+  letter-spacing: -.5px;
+}
+
+.intro {
+  color: var(--muted);
+  margin: 0 0 25px;
+}
+
+.panel {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 22px;
+  margin-bottom: 18px;
+  background: var(--white);
+}
+
+.section-title {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.small {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.question {
+  padding: 19px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.question:last-child {
+  border-bottom: none;
+}
+
+.question-head {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 13px;
+}
+
+.number {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--light);
+  color: var(--blue);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.controls {
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+}
+
+button {
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background .2s, opacity .2s;
+}
+
+button:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+
+.primary {
+  background: var(--blue);
+  color: white;
+  border: 1px solid var(--blue);
+}
+
+.primary:hover:not(:disabled) {
+  background: #42586a;
+}
+
+.secondary {
+  background: white;
+  color: var(--dark);
+  border: 1px solid var(--line);
+}
+
+.secondary:hover:not(:disabled) {
+  background: var(--light);
+}
+
+.danger {
+  background: #a33f3f;
+  color: white;
+  border: 1px solid #a33f3f;
+}
+
+.status {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 11px;
+}
+
+.status.recording {
+  color: #a33f3f;
+  font-weight: 700;
+}
+
+audio {
+  display: block;
+  width: 100%;
+  margin-top: 13px;
+}
+
+.download {
+  display: inline-block;
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 10px;
+  text-decoration: underline;
+}
+
+.hidden { display: none !important; }
+
+.test-box {
+  background: var(--light);
+  border-radius: 12px;
+  padding: 17px;
+  margin-bottom: 20px;
+}
+
+.decision-options {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 14px 0;
+}
+
+.decision-options label {
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 11px 15px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.decision-options input {
+  accent-color: var(--blue);
+  margin-right: 6px;
+}
+
+.footer {
+  margin-top: 20px;
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
+}
+
+.notice {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 15px;
+}
+
+@media(max-width:600px) {
+  .app { padding: 15px; }
+  .panel { padding: 16px; }
+  h1 { font-size: 22px; }
+  button { padding: 10px 12px; }
+}
+</style>
+</head>
+
+<body>
+
+<main class="app">
+
+  <h1>Cinco Perguntas Decisivas</h1>
+
+  <p class="intro">
+    Você é o oficial consular responsável por entrevistar
+    um solicitante brasileiro de visto de turismo para
+    os Estados Unidos.
+  </p>
+
+  <section class="panel">
+
+    <div class="section-title">Sua missão</div>
+
+    <p>
+      Formule oralmente cinco perguntas essenciais
+      para avaliar a solicitação de visto.
+      Grave cada pergunta separadamente.
+    </p>
+
+    <p>
+      Ao terminar, indique sua decisão e grave
+      uma breve justificativa.
+    </p>
+
+    <div class="test-box">
+      <strong>Teste do microfone</strong>
+      <p class="small">
+        Antes de começar, verifique se o navegador
+        permite gravar sua voz.
+      </p>
+
+      <div class="controls">
+        <button class="primary" id="testMic">
+          Testar microfone
+        </button>
+        <button class="secondary" id="stopTest" disabled>
+          Parar teste
+        </button>
+      </div>
+
+      <div class="status" id="testStatus">
+        Microfone ainda não testado.
+      </div>
+
+      <audio id="testAudio" controls class="hidden"></audio>
+    </div>
+
+    <div id="questions"></div>
+
+  </section>
+
+  <section class="panel">
+
+    <div class="section-title">Decisão consular</div>
+
+    <p>
+      Após formular suas cinco perguntas,
+      qual seria sua decisão?
+    </p>
+
+    <div class="decision-options">
+
+      <label>
+        <input type="radio" name="decision" value="Aprovar">
+        Aprovar
+      </label>
+
+      <label>
+        <input type="radio" name="decision" value="Recusar">
+        Recusar
+      </label>
+
+      <label>
+        <input type="radio" name="decision" value="Solicitar mais informações">
+        Solicitar mais informações
+      </label>
+
+    </div>
+
+    <p class="small">
+      Grave uma breve justificativa em português.
+      Explique quais informações seriam fundamentais
+      para fundamentar sua decisão.
+    </p>
+
+    <div id="decisionRecorder"></div>
+
+    <p class="notice">
+      Esta é uma simulação pedagógica.
+      A decisão não representa uma determinação
+      oficial de elegibilidade para visto.
+    </p>
+
+  </section>
+
+  <div class="footer">
+    <button class="secondary" id="restart">
+      Reiniciar atividade
+    </button>
+
+    <p class="notice">
+      As gravações ficam temporariamente neste navegador.
+      Baixe os arquivos antes de fechar a página.
+      Nenhuma gravação é enviada automaticamente.
+    </p>
+  </div>
+
+</main>
+
+<script>
+(function () {
+  "use strict";
+
+  const questionContainer =
+    document.getElementById("questions");
+
+  const decisionContainer =
+    document.getElementById("decisionRecorder");
+
+  let activeRecorder = null;
+  let activeStream = null;
+  let activeId = null;
+  let chunks = [];
+  let recordings = {};
+  let audioURLs = [];
+
+  function createRecorder(id, label) {
+    return `
+      <div class="question" id="block-${id}">
+
+        <div class="question-head">
+          <div class="number">
+            ${id === "decision" ? "✓" : id}
+          </div>
+          <strong>${label}</strong>
+        </div>
+
+        <div class="controls">
+
+          <button
+            class="primary"
+            id="record-${id}"
+            onclick="startRecording('${id}')">
+            ● Gravar
+          </button>
+
+          <button
+            class="danger"
+            id="stop-${id}"
+            onclick="stopRecording('${id}')"
+            disabled>
+            ■ Parar
+          </button>
+
+        </div>
+
+        <div class="status" id="status-${id}">
+          Aguardando gravação.
+        </div>
+
+        <audio
+          id="audio-${id}"
+          controls
+          class="hidden">
+        </audio>
+
+        <a
+          id="download-${id}"
+          class="download hidden">
+          Baixar gravação
+        </a>
+
+      </div>
+    `;
+  }
+
+  let html = "";
+
+  for (let i = 1; i <= 5; i++) {
+    html += createRecorder(
+      String(i),
+      "Pergunta " + i
+    );
+  }
+
+  questionContainer.innerHTML = html;
+
+  decisionContainer.innerHTML =
+    createRecorder(
+      "decision",
+      "Justificativa oral"
+    );
+
+  function status(id, message, isRecording = false) {
+    const element =
+      document.getElementById("status-" + id);
+
+    element.textContent = message;
+    element.classList.toggle(
+      "recording",
+      isRecording
+    );
+  }
+
+  function microphoneError(error) {
+    if (!window.isSecureContext) {
+      return "A gravação exige uma página HTTPS segura.";
+    }
+
+    if (error.name === "NotAllowedError") {
+      return "Acesso ao microfone bloqueado. Verifique as permissões do navegador ou da página incorporada.";
+    }
+
+    if (error.name === "NotFoundError") {
+      return "Nenhum microfone foi encontrado.";
+    }
+
+    if (error.name === "NotReadableError") {
+      return "O microfone está indisponível ou sendo utilizado por outro aplicativo.";
+    }
+
+    if (error.name === "SecurityError") {
+      return "O navegador bloqueou o acesso ao microfone neste ambiente.";
+    }
+
+    return "Não foi possível gravar: " + error.message;
+  }
+
+  async function start(id) {
+
+    if (activeRecorder) {
+      status(id, "Finalize a gravação atual primeiro.");
+      return;
+    }
+
+    if (!navigator.mediaDevices ||
+        !navigator.mediaDevices.getUserMedia ||
+        !window.MediaRecorder) {
+
+      status(
+        id,
+        "Este navegador ou ambiente não permite gravação de áudio."
+      );
+      return;
+    }
+
+    try {
+
+      activeStream =
+        await navigator.mediaDevices.getUserMedia({
+          audio: true
+        });
+
+      chunks = [];
+
+      const options = {};
+
+      if (
+        MediaRecorder.isTypeSupported(
+          "audio/webm;codecs=opus"
+        )
+      ) {
+        options.mimeType =
+          "audio/webm;codecs=opus";
+      }
+
+      const recorder =
+        new MediaRecorder(activeStream, options);
+
+      activeRecorder = recorder;
+      activeId = id;
+
+      recorder.ondataavailable = function (event) {
+        if (event.data.size > 0) {
+          chunks.push(event.data);
+        }
+      };
+
+      recorder.onstop = function () {
+
+        const type =
+          recorder.mimeType || "audio/webm";
+
+        const blob =
+          new Blob(chunks, { type });
+
+        const url =
+          URL.createObjectURL(blob);
+
+        audioURLs.push(url);
+
+        recordings[id] = blob;
+
+        const player =
+          document.getElementById("audio-" + id);
+
+        player.src = url;
+        player.classList.remove("hidden");
+
+        const link =
+          document.getElementById("download-" + id);
+
+        const extension =
+          type.includes("mp4") ? "mp4" :
+          type.includes("ogg") ? "ogg" : "webm";
+
+        link.href = url;
+        link.download =
+          "simulacao_consular_" + id + "." + extension;
+
+        link.classList.remove("hidden");
+
+        status(
+          id,
+          "Gravação concluída. Ouça sua resposta."
+        );
+
+        cleanup();
+
+      };
+
+      recorder.onerror = function () {
+        status(id, "Ocorreu um erro na gravação.");
+        cleanup();
+      };
+
+      recorder.start();
+
+      document.getElementById(
+        "record-" + id
+      ).disabled = true;
+
+      document.getElementById(
+        "stop-" + id
+      ).disabled = false;
+
+      status(id, "● Gravando...", true);
+
+    } catch (error) {
+      status(id, microphoneError(error));
+      cleanup();
+    }
+
+  }
+
+  function stop(id) {
+
+    if (
+      !activeRecorder ||
+      activeId !== id
+    ) {
+      return;
+    }
+
+    if (activeRecorder.state === "recording") {
+      activeRecorder.stop();
+    }
+
+    document.getElementById(
+      "record-" + id
+    ).disabled = false;
+
+    document.getElementById(
+      "stop-" + id
+    ).disabled = true;
+
+  }
+
+  function cleanup() {
+
+    if (activeStream) {
+      activeStream.getTracks().forEach(
+        track => track.stop()
+      );
+    }
+
+    activeStream = null;
+    activeRecorder = null;
+    activeId = null;
+
+  }
+
+  window.startRecording = start;
+  window.stopRecording = stop;
+
+  // Microphone test
+
+  let testRecorder = null;
+  let testStream = null;
+  let testChunks = [];
+
+  const testMic =
+    document.getElementById("testMic");
+
+  const stopTest =
+    document.getElementById("stopTest");
+
+  const testStatus =
+    document.getElementById("testStatus");
+
+  const testAudio =
+    document.getElementById("testAudio");
+
+  testMic.addEventListener("click", async () => {
+
+    if (activeRecorder || testRecorder) {
+      testStatus.textContent =
+        "Finalize a gravação atual primeiro.";
+      return;
+    }
+
+    try {
+
+      if (!navigator.mediaDevices?.getUserMedia ||
+          !window.MediaRecorder) {
+        throw new Error(
+          "Gravação não disponível neste ambiente."
+        );
+      }
+
+      testStream =
+        await navigator.mediaDevices.getUserMedia({
+          audio: true
+        });
+
+      testChunks = [];
+
+      testRecorder =
+        new MediaRecorder(testStream);
+
+      testRecorder.ondataavailable = event => {
+        if (event.data.size) {
+          testChunks.push(event.data);
+        }
+      };
+
+      testRecorder.onstop = () => {
+
+        const blob = new Blob(testChunks, {
+          type: testRecorder.mimeType
+        });
+
+        const url = URL.createObjectURL(blob);
+
+        audioURLs.push(url);
+
+        testAudio.src = url;
+        testAudio.classList.remove("hidden");
+
+        testStatus.textContent =
+          "Teste concluído. Reproduza o áudio.";
+
+        testStream.getTracks().forEach(
+          track => track.stop()
+        );
+
+        testRecorder = null;
+        testStream = null;
+
+        testMic.disabled = false;
+        stopTest.disabled = true;
+
+      };
+
+      testRecorder.start();
+
+      testMic.disabled = true;
+      stopTest.disabled = false;
+
+      testStatus.textContent =
+        "● Gravando teste...";
+
+    } catch (error) {
+
+      testStatus.textContent =
+        microphoneError(error);
+
+      if (testStream) {
+        testStream.getTracks().forEach(
+          track => track.stop()
+        );
+      }
+
+      testStream = null;
+      testRecorder = null;
+
+    }
+
+  });
+
+  stopTest.addEventListener("click", () => {
+
+    if (
+      testRecorder &&
+      testRecorder.state === "recording"
+    ) {
+      testRecorder.stop();
+    }
+
+  });
+
+  document.getElementById("restart")
+    .addEventListener("click", () => {
+
+      if (!confirm(
+        "Reiniciar a atividade? As gravações não baixadas serão perdidas."
+      )) {
+        return;
+      }
+
+      if (activeRecorder &&
+          activeRecorder.state === "recording") {
+        activeRecorder.stop();
+      }
+
+      cleanup();
+
+      if (testRecorder &&
+          testRecorder.state === "recording") {
+        testRecorder.stop();
+      }
+
+      if (testStream) {
+        testStream.getTracks().forEach(
+          track => track.stop()
+        );
+      }
+
+      audioURLs.forEach(
+        url => URL.revokeObjectURL(url)
+      );
+
+      location.reload();
+
+    });
+
+})();
+</script>
+
+</body>
+</html>
